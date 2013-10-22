@@ -57,7 +57,7 @@ public class Halloween extends JavaPlugin {
 			Bukkit.getServer().getPluginManager().registerEvents(new EventsListener(), this);
 			this.getCommand("scare").setExecutor(new CommandsExecutor());
 			if(config.EnableUpdater) {
-				new Updater(this, "halloween", this.getFile(), UpdateType.DEFAULT, true);
+				new Updater(this, 67739, this.getFile(), UpdateType.DEFAULT, true);
 			}
 			startMetrics();
 			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "[Halloween] The plugin has been started.");

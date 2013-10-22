@@ -16,9 +16,6 @@ public class ConfigFile extends Config {
 		CONFIG_HEADER = "Halloween Config";
 		CONFIG_HEADER += "\n\nSounds available here : http://url.skyost.eu/n.";
 		
-		Sounds.add(Sound.AMBIENCE_THUNDER.name());
-		Sounds.add(Sound.BAT_LOOP.name());
-		Sounds.add(Sound.CHEST_OPEN.name());
 		Sounds.add(Sound.COW_WALK.name());
 		Sounds.add(Sound.CREEPER_HISS.name());
 		Sounds.add(Sound.ITEM_BREAK.name());

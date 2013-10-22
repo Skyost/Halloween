@@ -1,7 +1,7 @@
 name: Halloween
 main: com.skyost.october.Halloween
 description: Plugin for Halloween events.
-version: 0.2
+version: 0.2.1
 author: Skyost
 website: http://www.skyost.eu
 commands:
