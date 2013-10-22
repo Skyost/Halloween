@@ -17,6 +17,23 @@ public class CommandsExecutor implements CommandExecutor {
 		if(cmd.getName().equalsIgnoreCase("scare")) {
 			final Player player;
 			switch(args.length) {
+			case 0:
+				Player[] online = Bukkit.getOnlinePlayers();
+				player = online[Halloween.rand.nextInt(online.length)];
+				if(player != null) {
+					if(Halloween.config.Worlds.contains(player.getWorld().getName())) {
+						int id = Halloween.rand.nextInt(ScareUtils.getMaxID()) + 1;
+						ScareUtils.scarePlayer(player, id);
+						sender.sendMessage(ChatColor.GREEN + player.getName() + " is scared !");
+					}
+					else {
+						sender.sendMessage(ChatColor.RED + "This player is on a world where the plugin is disabled.");
+					}
+				}
+				else {
+					sender.sendMessage(ChatColor.RED + "This player is not connected !");
+				}
+				break;
 			case 1:
 				player = Bukkit.getPlayer(args[0]);
 				if(player != null) {
