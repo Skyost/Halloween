@@ -104,6 +104,13 @@ public class Halloween extends JavaPlugin {
     				return config.Sounds.size();
     			}
     		});
+    		Graph spawnWithPumpkinGraph = metrics.createGraph("spawnWithPumpkinGraph");
+    		spawnWithPumpkinGraph.addPlotter(new Metrics.Plotter("Spawn with pumpkin luck") {	
+    			@Override
+    			public int getValue() {	
+    				return config.SpawnWithPumpkin;
+    			}
+    		});
 		    metrics.start();
 		}
 		catch(Exception ex) {
