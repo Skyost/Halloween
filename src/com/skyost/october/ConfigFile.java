@@ -14,7 +14,7 @@ public class ConfigFile extends Config {
 	public ConfigFile(Plugin plugin) {
 		CONFIG_FILE = new File(plugin.getDataFolder(), "config.yml");
 		CONFIG_HEADER = "Halloween Config";
-		CONFIG_HEADER += "Sounds available here : http://url.skyost.eu/n.";
+		CONFIG_HEADER += "\n\nSounds available here : http://url.skyost.eu/n.";
 		
 		Sounds.add(Sound.AMBIENCE_THUNDER.name());
 		Sounds.add(Sound.BAT_LOOP.name());

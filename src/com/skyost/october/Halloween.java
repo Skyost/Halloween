@@ -10,6 +10,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.skyost.october.ConfigFile;
+import com.skyost.october.listeners.CommandsExecutor;
 import com.skyost.october.listeners.EventsListener;
 import com.skyost.october.tasks.Thundering;
 import com.skyost.october.util.Metrics;
@@ -52,8 +53,9 @@ public class Halloween extends JavaPlugin {
 				}
 			}
 			Bukkit.getServer().getPluginManager().registerEvents(new EventsListener(), this);
+			this.getCommand("scare").setExecutor(new CommandsExecutor());
 			if(config.EnableUpdater) {
-				new Updater(this, 0000, this.getFile(), UpdateType.DEFAULT, true);
+				new Updater(this, "halloween", this.getFile(), UpdateType.DEFAULT, true);
 			}
 			startMetrics();
 			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "[Halloween] The plugin has been started.");

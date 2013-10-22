@@ -19,7 +19,7 @@ public class RandomEvent implements Runnable {
 	@Override
 	public void run() {
 		if(Bukkit.getPlayer(playername) != null && Halloween.config.Worlds.contains(Bukkit.getPlayer(playername).getWorld().getName())) {
-			ScareUtils.scarePlayer(Bukkit.getPlayer(playername));
+			ScareUtils.scarePlayer(Bukkit.getPlayer(playername), rand.nextInt(5) + 1);
 			if(Halloween.config.RandomEvents) {
 				Bukkit.getScheduler().scheduleSyncDelayedTask(Halloween.plugin, new RandomEvent(playername), rand.nextInt(Halloween.config.MaxRandom) * 20);
 			}
