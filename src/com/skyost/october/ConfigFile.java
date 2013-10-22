@@ -41,7 +41,7 @@ public class ConfigFile extends Config {
 	public boolean FakeLightning = true;
 	public boolean CreaturesWearPumpkins = true;
 	
-	public boolean CheckForUpdates = true;
+	public boolean EnableUpdater = true;
 	
 	public int MaxRandom = 1200;
 }

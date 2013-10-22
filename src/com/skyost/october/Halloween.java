@@ -12,6 +12,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.skyost.october.ConfigFile;
 import com.skyost.october.listeners.EventsListener;
 import com.skyost.october.tasks.Thundering;
+import com.skyost.october.util.Metrics;
+import com.skyost.october.util.Metrics.Graph;
+import com.skyost.october.util.Updater;
+import com.skyost.october.util.Updater.UpdateType;
 
 public class Halloween extends JavaPlugin {
 	
@@ -48,7 +52,55 @@ public class Halloween extends JavaPlugin {
 				}
 			}
 			Bukkit.getServer().getPluginManager().registerEvents(new EventsListener(), this);
+			if(config.EnableUpdater) {
+				new Updater(this, 0000, this.getFile(), UpdateType.DEFAULT, true);
+			}
+			startMetrics();
 			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "[Halloween] The plugin has been started.");
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	private final void startMetrics() {
+		try {
+		    Metrics metrics = new Metrics(this);
+		    Graph checkUpdatesGraph = metrics.createGraph("checkUpdatesGraph");
+		    checkUpdatesGraph.addPlotter(new Metrics.Plotter("Checking for Updates") {  
+		    @Override
+		    public int getValue() {  
+		    	return 1;
+		    }
+		    
+		    @Override
+		    public String getColumnName() {
+		    	if(config.EnableUpdater) {
+		    		return "Yes";
+		    	}
+		    	else if(!config.EnableUpdater) {
+		    		return "No";
+		    	}
+		    	else {
+		    		return "Maybe";
+		    	}
+		    }
+		    });
+    		Graph worldsNumberGraph = metrics.createGraph("worldsNumberGraph");
+    		worldsNumberGraph.addPlotter(new Metrics.Plotter("Worlds number") {	
+    			@Override
+    			public int getValue() {	
+    				return config.Worlds.size();
+    			}
+    		});
+    		Graph soundsNumberGraph = metrics.createGraph("soundsNumberGraph");
+    		soundsNumberGraph.addPlotter(new Metrics.Plotter("Sounds number") {	
+    			@Override
+    			public int getValue() {	
+    				return config.Sounds.size();
+    			}
+    		});
+		    metrics.start();
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();
