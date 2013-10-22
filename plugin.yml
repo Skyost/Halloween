@@ -1,0 +1,15 @@
+name: Halloween
+main: com.skyost.october.Halloween
+description: Plugin for Halloween events.
+version: 0.2
+author: Skyost
+website: http://www.skyost.eu
+commands:
+ scare:
+  description: Scare a player.
+  usage: /scare <player> [id].
+  permission: halloween.scare
+permissions:
+ halloween.scare:
+  default: true
+  description: Allow you to scare a player.
