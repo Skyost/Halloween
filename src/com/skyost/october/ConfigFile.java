@@ -44,4 +44,5 @@ public class ConfigFile extends Config {
 	public boolean EnableUpdater = true;
 	
 	public int MaxRandom = 1200;
+	public int SpawnWithPumpkin = 100;
 }

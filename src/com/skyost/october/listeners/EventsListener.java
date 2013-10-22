@@ -1,7 +1,5 @@
 package com.skyost.october.listeners;
 
-import java.util.Random;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -35,7 +33,7 @@ public class EventsListener implements Listener {
 	private final void onPlayerJoin(PlayerJoinEvent event) {
 		if(Halloween.config.Worlds.contains(event.getPlayer().getWorld().getName())) {
 			if(Halloween.config.SoundOnLogin) {
-				Sound sound = Sound.valueOf(Halloween.config.Sounds.get(new Random().nextInt(Halloween.config.Sounds.size())));
+				Sound sound = Sound.valueOf(Halloween.config.Sounds.get(Halloween.rand.nextInt(Halloween.config.Sounds.size())));
 				for(Player online : event.getPlayer().getWorld().getPlayers()) {
 					online.playSound(online.getLocation(), sound, 1F, 1F);
 				}
@@ -50,16 +48,19 @@ public class EventsListener implements Listener {
 	private static final void onCreatureSpawn(CreatureSpawnEvent event) {
 		if(Halloween.config.Worlds.contains(event.getEntity().getWorld().getName())) {
 			if(Halloween.config.CreaturesWearPumpkins) {
-				if(event.getEntity().getType().equals(EntityType.ZOMBIE)) {
-					Zombie zombie = (Zombie)event.getEntity();
-				    if(!zombie.isBaby()) {
-				    	event.getEntity().getEquipment().setHelmet(new ItemStack(Material.PUMPKIN));
-				    	event.getEntity().getEquipment().setHelmetDropChance(0.0F);
-				    }
-				}
-				else {
-					event.getEntity().getEquipment().setHelmet(new ItemStack(Material.PUMPKIN));
-				 	event.getEntity().getEquipment().setHelmetDropChance(0.0F);
+				int luck = Halloween.rand.nextInt(100) + 1;
+				if(luck <= Halloween.config.SpawnWithPumpkin) {
+					if(event.getEntity().getType().equals(EntityType.ZOMBIE)) {
+						Zombie zombie = (Zombie)event.getEntity();
+					    if(!zombie.isBaby()) {
+					    	event.getEntity().getEquipment().setHelmet(new ItemStack(Material.PUMPKIN));
+					    	event.getEntity().getEquipment().setHelmetDropChance(0.0F);
+					    }
+					}
+					else {
+						event.getEntity().getEquipment().setHelmet(new ItemStack(Material.PUMPKIN));
+					 	event.getEntity().getEquipment().setHelmetDropChance(0.0F);
+					}
 				}
 			}
 		}

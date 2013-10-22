@@ -23,6 +23,8 @@ public class Halloween extends JavaPlugin {
 	public static ConfigFile config;
 	public static Plugin plugin;
 	
+	public static final Random rand = new Random();
+	
 	public void onEnable() {
 		try {
 			config = new ConfigFile(this);
@@ -39,7 +41,7 @@ public class Halloween extends JavaPlugin {
 						world.setStorm(true);
 					}
 					if(config.FakeLightning) {
-						Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Thundering(world), new Random().nextInt(500));
+						Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Thundering(world), rand.nextInt(500));
 					}
 				}
 				else {

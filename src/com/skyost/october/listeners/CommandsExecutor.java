@@ -1,7 +1,5 @@
 package com.skyost.october.listeners;
 
-import java.util.Random;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -23,7 +21,7 @@ public class CommandsExecutor implements CommandExecutor {
 				player = Bukkit.getPlayer(args[0]);
 				if(player != null) {
 					if(Halloween.config.Worlds.contains(player.getWorld().getName())) {
-						int id = new Random().nextInt(5) + 1;
+						int id = Halloween.rand.nextInt(ScareUtils.getMaxID()) + 1;
 						ScareUtils.scarePlayer(player, id);
 						sender.sendMessage(ChatColor.GREEN + player.getName() + " is scared !");
 					}
