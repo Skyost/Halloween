@@ -4,12 +4,20 @@ description: Plugin for Halloween events.
 version: 0.2.1
 author: Skyost
 website: http://www.skyost.eu
+softdepend: [Citizens]
 commands:
  scare:
   description: Scare a player.
   usage: /scare <player> [id].
   permission: halloween.scare
+ haunt:
+  description: Haunt a player.
+  usage: /haunt <player> [time].
+  permission: halloween.haunt
 permissions:
  halloween.scare:
   default: true
   description: Allow you to scare a player.
+ halloween.haunt:
+  default: true
+  description: Allow you to haunt a player.

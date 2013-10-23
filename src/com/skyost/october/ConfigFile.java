@@ -20,6 +20,8 @@ public class ConfigFile extends Config {
 		Sounds.add(Sound.CREEPER_HISS.name());
 		Sounds.add(Sound.ITEM_BREAK.name());
 		Sounds.add(Sound.WITHER_SPAWN.name());
+		Sounds.add(Sound.WOLF_GROWL.name());
+		Sounds.add(Sound.WOLF_HOWL.name());
 		Sounds.add(Sound.ZOMBIE_UNFECT.name());
 		
 		Worlds.add("WorldA");
@@ -37,8 +39,11 @@ public class ConfigFile extends Config {
 	public boolean Storm = true;
 	public boolean FakeLightning = true;
 	public boolean CreaturesWearPumpkins = true;
+	public boolean SpawnFallingBlock = true;
 	
 	public boolean EnableUpdater = true;
+	
+	public String HalloweenMessage = "§4Happy Halloween !";
 	
 	public int MaxRandom = 1200;
 	public int SpawnWithPumpkin = 100;

@@ -24,7 +24,7 @@ public class Thundering implements Runnable {
 			int z = Halloween.rand.nextInt(25);
 			world.strikeLightningEffect(online.get(player).getLocation().add(x, 0, z));
 		}
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Halloween.plugin, this, Halloween.rand.nextInt(500));
+		Bukkit.getScheduler().scheduleSyncDelayedTask(Halloween.plugin, this, Halloween.rand.nextInt(400));
 	}
 
 }

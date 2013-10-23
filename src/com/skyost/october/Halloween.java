@@ -1,11 +1,14 @@
 package com.skyost.october;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.World;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -23,7 +26,9 @@ public class Halloween extends JavaPlugin {
 	public static ConfigFile config;
 	public static Plugin plugin;
 	
+	public static final List<String> haunted = new ArrayList<String>();
 	public static final Random rand = new Random();
+	public static boolean useCitizens = false;
 	
 	public void onEnable() {
 		try {
@@ -55,11 +60,17 @@ public class Halloween extends JavaPlugin {
 				}
 			}
 			Bukkit.getServer().getPluginManager().registerEvents(new EventsListener(), this);
-			this.getCommand("scare").setExecutor(new CommandsExecutor());
+			CommandExecutor executor = new CommandsExecutor();
+			this.getCommand("scare").setExecutor(executor);
+			this.getCommand("haunt").setExecutor(executor);
 			if(config.EnableUpdater) {
 				new Updater(this, 67739, this.getFile(), UpdateType.DEFAULT, true);
 			}
 			startMetrics();
+			if(Bukkit.getPluginManager().getPlugin("Citizens") != null) {
+				Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "[Halloween] Now using Citizens.");
+				useCitizens = true;
+			}
 			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "[Halloween] The plugin has been started.");
 		}
 		catch(Exception ex) {
