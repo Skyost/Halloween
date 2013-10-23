@@ -1,10 +1,5 @@
 package com.skyost.october.util;
 
-import net.citizensnpcs.api.CitizensAPI;
-import net.citizensnpcs.api.npc.NPC;
-import net.citizensnpcs.api.npc.NPCRegistry;
-import net.citizensnpcs.trait.LookClose;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Location;
@@ -19,7 +14,6 @@ import com.skyost.october.Halloween;
 
 public class ScareUtils {
 	
-	@SuppressWarnings("deprecation")
 	public static final void scarePlayer(final Player player, int id) {
 		final Location loc = player.getLocation();
 		switch(id) {
@@ -70,26 +64,8 @@ public class ScareUtils {
 		case 5:
 			player.playSound(player.getLocation(), Sound.WITHER_SPAWN, 1F, 0);
 			player.getWorld().playEffect(player.getLocation(), Effect.MOBSPAWNER_FLAMES, 1);
-			if(Halloween.useCitizens) {
-				NPCRegistry registry = CitizensAPI.getNPCRegistry();
-				final NPC npc = registry.createNPC(EntityType.PLAYER, "Herobrine");
-				npc.setProtected(true);
-				player.getWorld().playEffect(player.getTargetBlock(null, 100).getLocation(), Effect.MOBSPAWNER_FLAMES, 1);
-				npc.spawn(player.getTargetBlock(null, 100).getLocation().add(0, 1, 0));
-				LookClose lookclose = CitizensAPI.getTraitFactory().getTrait(LookClose.class);
-				lookclose.lookClose(true);
-				lookclose.setRange((int)player.getLocation().distance(npc.getBukkitEntity().getLocation()));
-				npc.addTrait(lookclose);
-				Bukkit.getScheduler().scheduleSyncDelayedTask(Halloween.plugin, new Runnable() {
-
-					@Override
-					public void run() {
-						player.getWorld().playEffect(player.getLocation(), Effect.MOBSPAWNER_FLAMES, 1);
-						player.getWorld().playEffect(npc.getBukkitEntity().getLocation(), Effect.MOBSPAWNER_FLAMES, 1);
-						npc.destroy();
-					}
-					
-				}, 150);
+			if(Halloween.citizensutils != null) {
+				Halloween.citizensutils.spawnNPCForPlayer("Herobrine", player, 150);
 			}
 			break;
 		}

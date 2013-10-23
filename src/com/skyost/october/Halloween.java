@@ -16,6 +16,7 @@ import com.skyost.october.ConfigFile;
 import com.skyost.october.listeners.CommandsExecutor;
 import com.skyost.october.listeners.EventsListener;
 import com.skyost.october.tasks.Thundering;
+import com.skyost.october.util.CitizensUtils;
 import com.skyost.october.util.Metrics;
 import com.skyost.october.util.Metrics.Graph;
 import com.skyost.october.util.Updater;
@@ -25,10 +26,10 @@ public class Halloween extends JavaPlugin {
 	
 	public static ConfigFile config;
 	public static Plugin plugin;
+	public static CitizensUtils citizensutils = null;
 	
 	public static final List<String> haunted = new ArrayList<String>();
 	public static final Random rand = new Random();
-	public static boolean useCitizens = false;
 	
 	public void onEnable() {
 		try {
@@ -69,7 +70,7 @@ public class Halloween extends JavaPlugin {
 			startMetrics();
 			if(Bukkit.getPluginManager().getPlugin("Citizens") != null) {
 				Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "[Halloween] Now using Citizens.");
-				useCitizens = true;
+				citizensutils = new CitizensUtils();
 			}
 			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "[Halloween] The plugin has been started.");
 		}
