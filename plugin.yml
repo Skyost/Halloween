@@ -1,10 +1,10 @@
 name: Halloween
 main: com.skyost.october.Halloween
 description: Plugin for Halloween events.
-version: 0.2.1
+version: 0.4
 author: Skyost
 website: http://www.skyost.eu
-softdepend: [Citizens]
+softdepend: [Citizens, Vault]
 commands:
  scare:
   description: Scare a player.
@@ -21,3 +21,9 @@ permissions:
  halloween.haunt:
   default: true
   description: Allow you to haunt a player.
+ halloween.events.bypass:
+  default: false
+  description: Allow you to bypass random events.
+ halloween.curses.bypass:
+  default: false
+  description: Allow you to bypass curses.

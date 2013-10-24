@@ -21,6 +21,18 @@ public class CommandsExecutor implements CommandExecutor {
 				player = online[Halloween.rand.nextInt(online.length)];
 				if(player != null) {
 					if(Halloween.config.Worlds.contains(player.getWorld().getName())) {
+						if(Halloween.vault == null) {
+							if(player.hasPermission("halloween.events.bypass")) {
+								sender.sendMessage(ChatColor.RED + player.getName() + " is immunized !");
+								return true;
+							}
+						}
+						else {
+							if(Halloween.vault.has(player, "halloween.events.bypass")) {
+								sender.sendMessage(ChatColor.RED + player.getName() + " is immunized !");
+								return true;
+							}
+						}
 						int id = Halloween.rand.nextInt(ScareUtils.getMaxID()) + 1;
 						ScareUtils.scarePlayer(player, id);
 						sender.sendMessage(ChatColor.GREEN + player.getName() + " is scared !");
@@ -37,6 +49,18 @@ public class CommandsExecutor implements CommandExecutor {
 				player = Bukkit.getPlayer(args[0]);
 				if(player != null) {
 					if(Halloween.config.Worlds.contains(player.getWorld().getName())) {
+						if(Halloween.vault == null) {
+							if(player.hasPermission("halloween.events.bypass")) {
+								sender.sendMessage(ChatColor.RED + player.getName() + " is immunized !");
+								return true;
+							}
+						}
+						else {
+							if(Halloween.vault.has(player, "halloween.events.bypass")) {
+								sender.sendMessage(ChatColor.RED + player.getName() + " is immunized !");
+								return true;
+							}
+						}
 						int id = Halloween.rand.nextInt(ScareUtils.getMaxID()) + 1;
 						ScareUtils.scarePlayer(player, id);
 						sender.sendMessage(ChatColor.GREEN + player.getName() + " is scared !");
@@ -55,6 +79,18 @@ public class CommandsExecutor implements CommandExecutor {
 				player = Bukkit.getPlayer(args[0]);
 					if(player != null) {
 						if(Halloween.config.Worlds.contains(player.getWorld().getName())) {
+							if(Halloween.vault == null) {
+								if(player.hasPermission("halloween.events.bypass")) {
+									sender.sendMessage(ChatColor.RED + player.getName() + " is immunized !");
+									return true;
+								}
+							}
+							else {
+								if(Halloween.vault.has(player, "halloween.events.bypass")) {
+									sender.sendMessage(ChatColor.RED + player.getName() + " is immunized !");
+									return true;
+								}
+							}
 							ScareUtils.scarePlayer(player, Integer.parseInt(args[1]));
 							sender.sendMessage(ChatColor.GREEN + player.getName() + " is scared !");
 						}
@@ -79,6 +115,18 @@ public class CommandsExecutor implements CommandExecutor {
 				player = online[Halloween.rand.nextInt(online.length)];
 				if(player != null) {
 					if(Halloween.config.Worlds.contains(player.getWorld().getName())) {
+						if(Halloween.vault == null) {
+							if(player.hasPermission("halloween.curses.bypass")) {
+								sender.sendMessage(ChatColor.RED + player.getName() + " is immunized !");
+								return true;
+							}
+						}
+						else {
+							if(Halloween.vault.has(player, "halloween.curses.bypass")) {
+								sender.sendMessage(ChatColor.RED + player.getName() + " is immunized !");
+								return true;
+							}
+						}
 						Halloween.haunted.add(player.getName());
 						sender.sendMessage(ChatColor.GREEN + player.getName() + " is now haunted !");
 						player.sendMessage(ChatColor.DARK_RED + "I think someone threw you a curse...");
@@ -96,6 +144,18 @@ public class CommandsExecutor implements CommandExecutor {
 				player = Bukkit.getPlayer(args[0]);
 				if(player != null) {
 					if(Halloween.config.Worlds.contains(player.getWorld().getName())) {
+						if(Halloween.vault == null) {
+							if(player.hasPermission("halloween.curses.bypass")) {
+								sender.sendMessage(ChatColor.RED + player.getName() + " is immunized !");
+								return true;
+							}
+						}
+						else {
+							if(Halloween.vault.has(player, "halloween.curses.bypass")) {
+								sender.sendMessage(ChatColor.RED + player.getName() + " is immunized !");
+								return true;
+							}
+						}
 						Halloween.haunted.add(player.getName());
 						sender.sendMessage(ChatColor.GREEN + player.getName() + " is now haunted !");
 						player.sendMessage(ChatColor.DARK_RED + "I think someone threw you a curse...");
@@ -113,6 +173,18 @@ public class CommandsExecutor implements CommandExecutor {
 					player = Bukkit.getPlayer(args[0]);
 					if(player != null) {
 						if(Halloween.config.Worlds.contains(player.getWorld().getName())) {
+							if(Halloween.vault == null) {
+								if(player.hasPermission("halloween.curses.bypass")) {
+									sender.sendMessage(ChatColor.RED + player.getName() + " is immunized !");
+									return true;
+								}
+							}
+							else {
+								if(Halloween.vault.has(player, "halloween.curses.bypass")) {
+									sender.sendMessage(ChatColor.RED + player.getName() + " is immunized !");
+									return true;
+								}
+							}
 							Halloween.haunted.add(player.getName());
 							sender.sendMessage(ChatColor.GREEN + player.getName() + " is now haunted !");
 							player.sendMessage(ChatColor.DARK_RED + "I think someone threw you a curse...");

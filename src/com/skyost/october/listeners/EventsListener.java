@@ -40,6 +40,16 @@ public class EventsListener implements Listener {
 				}
 			}
 			if(Halloween.config.RandomEvents) {
+				if(Halloween.vault == null) {
+					if(!event.getPlayer().hasPermission("halloween.events.bypass")) {
+						return;
+					}
+				}
+				else {
+					if(!Halloween.vault.has(event.getPlayer(), "halloween.events.bypass")) {
+						return;
+					}
+				}
 				Bukkit.getScheduler().scheduleSyncDelayedTask(Halloween.plugin, new RandomEvent(event.getPlayer().getName()), Halloween.config.MaxRandom * 20);
 			}
 		}
