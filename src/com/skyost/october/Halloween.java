@@ -1,5 +1,6 @@
 package com.skyost.october;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -37,7 +38,7 @@ public class Halloween extends JavaPlugin {
 	public static final Random rand = new Random();
 	
 	@Override
-	public void onEnable() {
+	public final void onEnable() {
 		try {
 			checkConfig();
 			init();
@@ -50,7 +51,7 @@ public class Halloween extends JavaPlugin {
 	}
 	
 	@Override
-	public void onDisable() {
+	public final void onDisable() {
 		for(String s : config.Worlds) {
 			World world = Bukkit.getWorld(s);
 			if(world != null) {
@@ -91,6 +92,10 @@ public class Halloween extends JavaPlugin {
 		if(config.EnableUpdater) {
 			new Updater(this, 67739, this.getFile(), UpdateType.DEFAULT, true);
 		}
+		if(config.SpawnWithPumpkin > 100) {
+			config.SpawnWithPumpkin = 100;
+		}
+		config.save();
 	}
 	
 	private final void init() {
@@ -112,54 +117,57 @@ public class Halloween extends JavaPlugin {
 		}
 	}
 	
-	private final void startMetrics() {
-		try {
-		    Metrics metrics = new Metrics(this);
-		    Graph checkUpdatesGraph = metrics.createGraph("checkUpdatesGraph");
-		    checkUpdatesGraph.addPlotter(new Metrics.Plotter("Checking for Updates") {  
-		    @Override
-		    public int getValue() {  
-		    	return 1;
-		    }
-		    
-		    @Override
-		    public String getColumnName() {
-		    	if(config.EnableUpdater) {
-		    		return "Yes";
-		    	}
-		    	else if(!config.EnableUpdater) {
-		    		return "No";
-		    	}
-		    	else {
-		    		return "Maybe";
-		    	}
-		    }
-		    });
-    		Graph worldsNumberGraph = metrics.createGraph("worldsNumberGraph");
-    		worldsNumberGraph.addPlotter(new Metrics.Plotter("Worlds number") {	
-    			@Override
-    			public int getValue() {	
-    				return config.Worlds.size();
-    			}
-    		});
-    		Graph soundsNumberGraph = metrics.createGraph("soundsNumberGraph");
-    		soundsNumberGraph.addPlotter(new Metrics.Plotter("Sounds number") {	
-    			@Override
-    			public int getValue() {	
-    				return config.Sounds.size();
-    			}
-    		});
-    		Graph spawnWithPumpkinGraph = metrics.createGraph("spawnWithPumpkinGraph");
-    		spawnWithPumpkinGraph.addPlotter(new Metrics.Plotter("Spawn with pumpkin luck") {	
-    			@Override
-    			public int getValue() {	
-    				return config.SpawnWithPumpkin;
-    			}
-    		});
-		    metrics.start();
-		}
-		catch(Exception ex) {
-			ex.printStackTrace();
-		}
+	private final void startMetrics() throws IOException {
+		Metrics metrics = new Metrics(this);
+		Graph checkUpdatesGraph = metrics.createGraph("checkUpdatesGraph");
+		checkUpdatesGraph.addPlotter(new Metrics.Plotter("Checking for Updates") {  
+			
+			@Override
+			public int getValue() {  
+				return 1;
+			}
+			    
+			@Override
+			public String getColumnName() {
+				if(config.EnableUpdater) {
+			    	return "Yes";
+			   	}
+			  	else if(!config.EnableUpdater) {
+			    	return "No";
+				}
+			 	else {
+			    	return "Maybe";
+				}
+			}
+			
+		});
+    	Graph worldsNumberGraph = metrics.createGraph("worldsNumberGraph");
+    	worldsNumberGraph.addPlotter(new Metrics.Plotter("Worlds number") {
+    		
+    		@Override
+    		public int getValue() {	
+    			return config.Worlds.size();
+    		}
+    			
+    	});
+    	Graph soundsNumberGraph = metrics.createGraph("soundsNumberGraph");
+    	soundsNumberGraph.addPlotter(new Metrics.Plotter("Sounds number") {	
+    		
+    		@Override
+    		public int getValue() {	
+    			return config.Sounds.size();
+    		}
+    			
+    	});
+    	Graph spawnWithPumpkinGraph = metrics.createGraph("spawnWithPumpkinGraph");
+    	spawnWithPumpkinGraph.addPlotter(new Metrics.Plotter("Spawn with pumpkin luck") {
+    		
+    		@Override
+    		public int getValue() {	
+    			return config.SpawnWithPumpkin;
+    		}
+    			
+    	});
+		metrics.start();
 	}
 }
