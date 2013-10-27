@@ -36,10 +36,9 @@ public class ConfigFile extends Config {
 	public boolean RandomEvents = true;
 	public boolean PermanentNight = true;
 	public boolean SoundOnLogin = true;
-	public boolean Storm = true;
+	public boolean Storm = false;
 	public boolean FakeLightning = true;
 	public boolean CreaturesWearPumpkins = true;
-	public boolean SpawnFallingBlock = true;
 	
 	public boolean EnableUpdater = true;
 	

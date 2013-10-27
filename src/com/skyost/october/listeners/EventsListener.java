@@ -1,8 +1,10 @@
 package com.skyost.october.listeners;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
@@ -10,6 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.player.PlayerEggThrowEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.inventory.ItemStack;
@@ -81,18 +84,33 @@ public class EventsListener implements Listener {
 	private static final void onBlockPlace(final BlockPlaceEvent event) {
 		if(Halloween.config.Worlds.contains(event.getPlayer().getWorld().getName())) {
 			if(Halloween.haunted.contains(event.getPlayer().getName())) {
-				if(event.getBlock().getType() == Material.TORCH) {
+				final Block block = event.getBlock();
+				if(block.getType() == Material.TORCH) {
 					Bukkit.getScheduler().scheduleSyncDelayedTask(Halloween.plugin, new Runnable() {
 	
 						@Override
 						public void run() {
-							if(!event.getBlock().breakNaturally()) {
-								event.getBlock().setType(Material.AIR);
-								event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.TORCH));
+							if(!block.breakNaturally()) {
+								block.setType(Material.AIR);
+								block.getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.TORCH));
 							}
 						}
 						
 					}, Halloween.rand.nextInt(300));
+				}
+			}
+		}
+	}
+	
+	@EventHandler
+	private static final void onPlayerEggThrow(final PlayerEggThrowEvent event) {
+		if(Halloween.config.Worlds.contains(event.getPlayer().getWorld().getName())) {
+			if(Halloween.haunted.contains(event.getPlayer().getName())) {
+				if(event.isHatching()) {
+					final Location loc = event.getEgg().getLocation();
+					Zombie zombie = (Zombie)loc.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
+					zombie.setBaby(true);
+					event.setHatching(false);
 				}
 			}
 		}

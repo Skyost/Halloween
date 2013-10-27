@@ -12,17 +12,18 @@ import org.bukkit.inventory.ItemStack;
 
 import com.skyost.october.Halloween;
 
+@SuppressWarnings("deprecation")
 public class ScareUtils {
 	
 	public static final void scarePlayer(final Player player, int id) {
-		final Location loc = player.getLocation();
+		Location loc;
 		switch(id) {
 		case 1:
 			Sound sound = Sound.valueOf(Halloween.config.Sounds.get(Halloween.rand.nextInt(Halloween.config.Sounds.size())));
 			player.playSound(player.getLocation(), sound, 1F, 1F);
 			break;
 		case 2:
-			player.getWorld().strikeLightningEffect(player.getLocation());
+			player.getWorld().strikeLightningEffect(player.getLocation().add(Halloween.rand.nextInt(5), 0, Halloween.rand.nextInt(5)));
 			break;
 		case 3:
 			final ItemStack helmet = player.getEquipment().getHelmet();
@@ -44,6 +45,7 @@ public class ScareUtils {
 			break;
 		case 4:
 			default:
+			loc = player.getLocation();
 			final Bat bone = (Bat)player.getWorld().spawnEntity(loc, EntityType.BAT);
 			final Bat btwo = (Bat)player.getWorld().spawnEntity(loc, EntityType.BAT);
 			final Bat bthree = (Bat)player.getWorld().spawnEntity(loc, EntityType.BAT);
@@ -68,11 +70,15 @@ public class ScareUtils {
 				Halloween.citizensutils.spawnNPCForPlayer("Herobrine", player, 150);
 			}
 			break;
+		case 6:
+			loc = player.getTargetBlock(null, 100).getLocation();
+			loc.getWorld().createExplosion(loc.getX(), loc.getY(), loc.getZ(), 4F, false, false);
+			break;
 		}
 	}
 	
 	public static final int getMaxID() {
-		return 5;
+		return 6;
 	}
 
 }

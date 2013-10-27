@@ -68,12 +68,10 @@ public class Halloween extends JavaPlugin {
 		for(String s : config.Worlds) {
 			World world = Bukkit.getWorld(s);
 			if(world != null) {
+				world.setStorm(config.Storm);
 				if(config.PermanentNight) {
 					world.setTime(18000);
 					world.setGameRuleValue("doDaylightCycle", "false");
-				}
-				if(config.Storm) {
-					world.setStorm(true);
 				}
 				if(config.FakeLightning) {
 					Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Thundering(world), rand.nextInt(500));
