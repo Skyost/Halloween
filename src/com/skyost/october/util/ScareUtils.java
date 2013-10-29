@@ -74,11 +74,32 @@ public class ScareUtils {
 			loc = player.getTargetBlock(null, 100).getLocation();
 			loc.getWorld().createExplosion(loc.getX(), loc.getY(), loc.getZ(), 4F, false, false);
 			break;
+		case 7:
+			loc = player.getLocation().add(Halloween.rand.nextInt(60) + 30, 0, Halloween.rand.nextInt(30) + 15);
+			loc.setY(player.getWorld().getHighestBlockYAt(loc));
+			player.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
+			player.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
+			player.getWorld().spawnEntity(loc, EntityType.SKELETON);
+			player.getWorld().spawnEntity(loc, EntityType.SKELETON);
+			player.getWorld().spawnEntity(loc, EntityType.SPIDER);
+			player.getWorld().spawnEntity(loc, EntityType.SPIDER);
+			player.sendMessage("<????> Help me or he will kill us ! I am at X : " + loc.getBlockX() + ", Y : " + loc.getBlockY() + ", Z : " + loc.getBlockZ() + ". Please come quickly :s");
+			break;
+		case 8:
+			Player random = player.getWorld().getPlayers().get(Halloween.rand.nextInt(player.getWorld().getPlayers().size()));
+			if(!random.getName().equalsIgnoreCase(player.getName())) {
+				player.sendMessage("<" + random.getName() + "> Help me dude, I will die !");
+			}
+			else {
+				player.sendMessage("<Skyost> BWAAAAAA !");
+				player.playSound(player.getLocation(), Sound.AMBIENCE_CAVE, 2F, 0);
+			}
+			break;
 		}
 	}
 	
 	public static final int getMaxID() {
-		return 6;
+		return 8;
 	}
 
 }

@@ -5,6 +5,8 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
+import org.bukkit.block.Chest;
+import org.bukkit.block.DoubleChest;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
@@ -12,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerEggThrowEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
@@ -115,5 +118,16 @@ public class EventsListener implements Listener {
 			}
 		}
 	}
+	
+	@EventHandler
+    public void onInventoryOpenEvent(InventoryOpenEvent event) {
+		if(Halloween.config.Worlds.contains(event.getPlayer().getWorld().getName())) {
+			if(Halloween.haunted.contains(event.getPlayer().getName())) {
+		        if(event.getInventory().getHolder() instanceof Chest || event.getInventory().getHolder() instanceof DoubleChest) {
+		            event.getPlayer().getWorld().spawnEntity(event.getPlayer().getLocation(), EntityType.BAT);
+		        }
+			}
+		}
+    }
 
 }
