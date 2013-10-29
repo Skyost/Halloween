@@ -23,7 +23,9 @@ public class ScareUtils {
 			player.playSound(player.getLocation(), sound, 1F, 1F);
 			break;
 		case 2:
-			player.getWorld().strikeLightningEffect(player.getLocation().add(Halloween.rand.nextInt(5), 0, Halloween.rand.nextInt(5)));
+			loc = player.getLocation().add(Halloween.rand.nextInt(5), 0, Halloween.rand.nextInt(5));
+			loc.setY(player.getWorld().getHighestBlockYAt(loc));
+			player.getWorld().strikeLightningEffect(loc);
 			break;
 		case 3:
 			final ItemStack helmet = player.getEquipment().getHelmet();
@@ -75,7 +77,7 @@ public class ScareUtils {
 			loc.getWorld().createExplosion(loc.getX(), loc.getY(), loc.getZ(), 4F, false, false);
 			break;
 		case 7:
-			loc = player.getLocation().add(Halloween.rand.nextInt(60) + 30, 0, Halloween.rand.nextInt(30) + 15);
+			loc = player.getLocation().add(Halloween.rand.nextInt(120) + 60, 0, Halloween.rand.nextInt(90) + 45);
 			loc.setY(player.getWorld().getHighestBlockYAt(loc));
 			player.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
 			player.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
