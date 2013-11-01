@@ -8,11 +8,13 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Bat;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Skeleton;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import com.skyost.october.Halloween;
 
-@SuppressWarnings("deprecation")
 public class ScareUtils {
 	
 	public static final void scarePlayer(final Player player, int id) {
@@ -48,10 +50,10 @@ public class ScareUtils {
 		case 4:
 			default:
 			loc = player.getLocation();
-			final Bat bone = (Bat)player.getWorld().spawnEntity(loc, EntityType.BAT);
-			final Bat btwo = (Bat)player.getWorld().spawnEntity(loc, EntityType.BAT);
-			final Bat bthree = (Bat)player.getWorld().spawnEntity(loc, EntityType.BAT);
-			final Bat bfour = (Bat)player.getWorld().spawnEntity(loc, EntityType.BAT);
+			final Bat bone = player.getWorld().spawn(loc, Bat.class);
+			final Bat btwo = player.getWorld().spawn(loc, Bat.class);
+			final Bat bthree = player.getWorld().spawn(loc, Bat.class);
+			final Bat bfour = player.getWorld().spawn(loc, Bat.class);
 			player.sendMessage(Halloween.config.HalloweenMessage);
 			Bukkit.getScheduler().scheduleSyncDelayedTask(Halloween.plugin, new Runnable() {
 
@@ -73,8 +75,23 @@ public class ScareUtils {
 			}
 			break;
 		case 6:
-			loc = player.getTargetBlock(null, 100).getLocation();
-			loc.getWorld().createExplosion(loc.getX(), loc.getY(), loc.getZ(), 4F, false, false);
+			final Bat bat = player.getWorld().spawn(player.getLocation(), Bat.class);
+			final Skeleton skeleton = player.getWorld().spawn(player.getLocation(), Skeleton.class);
+			bat.setPassenger(skeleton);
+			skeleton.getEquipment().setHelmet(new ItemStack(Material.JACK_O_LANTERN));
+			bat.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 0));
+			bat.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 0));
+			skeleton.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 0));
+			skeleton.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 0));
+			Bukkit.getScheduler().scheduleSyncDelayedTask(Halloween.plugin, new Runnable() {
+
+				@Override
+				public void run() {
+					skeleton.setHealth(0.0);
+					bat.setHealth(0.0);
+				}
+				
+			}, 1200);
 			break;
 		case 7:
 			loc = player.getLocation().add(Halloween.rand.nextInt(120) + 60, 0, Halloween.rand.nextInt(90) + 45);

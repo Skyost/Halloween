@@ -5,8 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
-import org.bukkit.block.Chest;
-import org.bukkit.block.DoubleChest;
+import org.bukkit.entity.Bat;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
@@ -15,6 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerEggThrowEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
@@ -70,8 +70,8 @@ public class EventsListener implements Listener {
 					if(event.getEntity().getType() == EntityType.ZOMBIE) {
 						Zombie zombie = (Zombie)event.getEntity();
 					    if(!zombie.isBaby()) {
-					    	event.getEntity().getEquipment().setHelmet(new ItemStack(Material.PUMPKIN));
-					    	event.getEntity().getEquipment().setHelmetDropChance(0.0F);
+					    	zombie.getEquipment().setHelmet(new ItemStack(Material.PUMPKIN));
+					    	zombie.getEquipment().setHelmetDropChance(0.0F);
 					    }
 					}
 					else {
@@ -111,7 +111,8 @@ public class EventsListener implements Listener {
 			if(Halloween.haunted.contains(event.getPlayer().getName())) {
 				if(event.isHatching()) {
 					final Location loc = event.getEgg().getLocation();
-					Zombie zombie = (Zombie)loc.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
+					Zombie zombie = loc.getWorld().spawn(loc, Zombie.class);
+					zombie.getEquipment().setHelmet(new ItemStack(Material.AIR));
 					zombie.setBaby(true);
 					event.setHatching(false);
 				}
@@ -123,8 +124,8 @@ public class EventsListener implements Listener {
     public void onInventoryOpenEvent(InventoryOpenEvent event) {
 		if(Halloween.config.Worlds.contains(event.getPlayer().getWorld().getName())) {
 			if(Halloween.haunted.contains(event.getPlayer().getName())) {
-		        if(event.getInventory().getHolder() instanceof Chest || event.getInventory().getHolder() instanceof DoubleChest) {
-		            event.getPlayer().getWorld().spawnEntity(event.getPlayer().getLocation(), EntityType.BAT);
+		        if(event.getInventory().getType() == InventoryType.CHEST) {
+		            event.getPlayer().getWorld().spawn(event.getPlayer().getLocation(), Bat.class);
 		        }
 			}
 		}
