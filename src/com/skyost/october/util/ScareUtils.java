@@ -1,6 +1,7 @@
 package com.skyost.october.util;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -9,7 +10,10 @@ import org.bukkit.entity.Bat;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Skeleton;
+import org.bukkit.entity.Zombie;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -105,9 +109,33 @@ public class ScareUtils {
 			player.sendMessage("<????> Help me or he will kill us ! I am at X : " + loc.getBlockX() + ", Y : " + loc.getBlockY() + ", Z : " + loc.getBlockZ() + ". Please come quickly :s");
 			break;
 		case 8:
-			Player random = player.getWorld().getPlayers().get(Halloween.rand.nextInt(player.getWorld().getPlayers().size()));
+			final Player random = player.getWorld().getPlayers().get(Halloween.rand.nextInt(player.getWorld().getPlayers().size()));
 			if(!random.getName().equalsIgnoreCase(player.getName())) {
 				player.sendMessage("<" + random.getName() + "> Help me dude, I will die !");
+				Bukkit.getScheduler().scheduleSyncDelayedTask(Halloween.plugin, new Runnable() {
+
+					@Override
+					public void run() {
+						player.sendMessage(random.getName() + "was death.");
+						final Zombie grimReaper = player.getWorld().spawn(player.getLocation(), Zombie.class);
+						EntityEquipment equip = grimReaper.getEquipment();
+						equip.setHelmet(new ItemStack(Material.SKULL_ITEM, 1, (short)1));
+					    ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
+					    LeatherArmorMeta meta = (LeatherArmorMeta)chestplate.getItemMeta();
+					    meta.setColor(Color.BLACK);
+					    chestplate.setItemMeta(meta);
+					    equip.setChestplate(chestplate);
+					    equip.setItemInHand(new ItemStack(Material.IRON_HOE));
+					    grimReaper.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1, false));
+					    grimReaper.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, false));
+					    grimReaper.setMaxHealth(30);
+					    grimReaper.setTarget(player);
+					    grimReaper.setCustomName("Grim Reaper");
+					    grimReaper.setCustomNameVisible(true);
+						player.playSound(player.getLocation(), Sound.GHAST_SCREAM2, 1F, 0F);
+					}
+					
+				}, 100);
 			}
 			else {
 				player.sendMessage("<Skyost> BWAAAAAA !");
