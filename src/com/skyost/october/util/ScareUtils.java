@@ -1,6 +1,7 @@
 package com.skyost.october.util;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Effect;
 import org.bukkit.Location;
@@ -22,7 +23,7 @@ import com.skyost.october.Halloween;
 public class ScareUtils {
 	
 	public static final void scarePlayer(final Player player, int id) {
-		Location loc;
+		final Location loc;
 		switch(id) {
 		case 1:
 			Sound sound = Sound.valueOf(Halloween.config.Sounds.get(Halloween.rand.nextInt(Halloween.config.Sounds.size())));
@@ -133,6 +134,15 @@ public class ScareUtils {
 					    grimReaper.setCustomName("Grim Reaper");
 					    grimReaper.setCustomNameVisible(true);
 						player.playSound(player.getLocation(), Sound.GHAST_SCREAM2, 1F, 0F);
+						Bukkit.getScheduler().scheduleSyncDelayedTask(Halloween.plugin, new Runnable() {
+
+							@Override
+							public void run() {
+								grimReaper.teleport(grimReaper.getLocation().add(0, 256, 0));
+								grimReaper.setHealth(0.0);
+							}
+							
+						}, 100);
 					}
 					
 				}, 100);
@@ -142,11 +152,25 @@ public class ScareUtils {
 				player.playSound(player.getLocation(), Sound.AMBIENCE_CAVE, 2F, 0);
 			}
 			break;
+		case 9:
+			loc = player.getLocation();
+			player.teleport(player.getWorld().getHighestBlockAt(loc.getBlockX(), loc.getBlockZ()).getLocation().add(0, 256, 0));
+			player.sendMessage(ChatColor.DARK_RED + "Whooooosh !");
+			Bukkit.getScheduler().scheduleSyncDelayedTask(Halloween.plugin, new Runnable() {
+
+				@Override
+				public void run() {
+					player.teleport(loc);
+					player.sendMessage(ChatColor.RED + "Are you scared now ?");
+				}
+				
+			}, 100);
+			break;
 		}
 	}
 	
 	public static final int getMaxID() {
-		return 8;
+		return 9;
 	}
 
 }

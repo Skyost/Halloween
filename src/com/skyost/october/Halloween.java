@@ -107,7 +107,7 @@ public class Halloween extends JavaPlugin {
 			citizensutils = new CitizensUtils();
 		}
 		if(Bukkit.getPluginManager().getPlugin("Vault") != null) {
-			RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration(Permission.class);
+			RegisteredServiceProvider<Permission> permissionProvider = Bukkit.getServicesManager().getRegistration(Permission.class);
 	        if(permissionProvider != null) {
 	        	Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "[Halloween] Now using Vault Permissions.");
 	        	vault = permissionProvider.getProvider();
