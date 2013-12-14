@@ -1,4 +1,4 @@
-package com.skyost.october;
+package fr.skyost.october;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,22 +17,22 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.skyost.october.ConfigFile;
-import com.skyost.october.listeners.CommandsExecutor;
-import com.skyost.october.listeners.EventsListener;
-import com.skyost.october.tasks.Thundering;
-import com.skyost.october.util.CitizensUtils;
-import com.skyost.october.util.Metrics;
-import com.skyost.october.util.Metrics.Graph;
-import com.skyost.october.util.Updater;
-import com.skyost.october.util.Updater.UpdateType;
+import fr.skyost.october.ConfigFile;
+import fr.skyost.october.listeners.CommandsExecutor;
+import fr.skyost.october.listeners.EventsListener;
+import fr.skyost.october.tasks.Thundering;
+import fr.skyost.october.utils.CitizensUtils;
+import fr.skyost.october.utils.Metrics;
+import fr.skyost.october.utils.Updater;
+import fr.skyost.october.utils.Metrics.Graph;
+import fr.skyost.october.utils.Updater.UpdateType;
 
 public class Halloween extends JavaPlugin {
 	
 	public static ConfigFile config;
 	public static Plugin plugin;
-	public static CitizensUtils citizensutils = null;
-	public static Permission vault = null;
+	public static CitizensUtils citizensutils;
+	public static Permission vault;
 	
 	public static final List<String> haunted = new ArrayList<String>();
 	public static final Random rand = new Random();
@@ -168,4 +168,5 @@ public class Halloween extends JavaPlugin {
     	});
 		metrics.start();
 	}
+	
 }

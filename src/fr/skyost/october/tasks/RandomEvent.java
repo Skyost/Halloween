@@ -1,14 +1,14 @@
-package com.skyost.october.tasks;
+package fr.skyost.october.tasks;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import com.skyost.october.Halloween;
-import com.skyost.october.util.ScareUtils;
+import fr.skyost.october.Halloween;
+import fr.skyost.october.utils.ScareUtils;
 
 public class RandomEvent implements Runnable {
 	
-	private static String playername;
+	private String playername;
 	
 	public RandomEvent(String targetPlayer) {
 		playername = targetPlayer;

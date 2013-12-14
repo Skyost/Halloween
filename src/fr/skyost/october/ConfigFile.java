@@ -1,4 +1,4 @@
-package com.skyost.october;
+package fr.skyost.october;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -7,9 +7,27 @@ import java.util.List;
 import org.bukkit.Sound;
 import org.bukkit.plugin.Plugin;
 
-import com.skyost.october.util.Config;
+import fr.skyost.october.utils.Config;
 
 public class ConfigFile extends Config {
+	
+	public List<String> Worlds = new ArrayList<String>();
+	
+	public List<String> Sounds = new ArrayList<String>();
+	
+	public boolean RandomEvents = true;
+	public boolean PermanentNight = true;
+	public boolean SoundOnLogin = true;
+	public boolean Storm = false;
+	public boolean FakeLightning = true;
+	public boolean CreaturesWearPumpkins = true;
+	
+	public boolean EnableUpdater = true;
+	
+	public String HalloweenMessage = "§4Happy Halloween !";
+	
+	public int MaxRandom = 1200;
+	public int SpawnWithPumpkin = 100;
 	
 	public ConfigFile(Plugin plugin) {
 		CONFIG_FILE = new File(plugin.getDataFolder(), "config.yml");
@@ -29,21 +47,4 @@ public class ConfigFile extends Config {
 		Worlds.add("WorldC");
 	}
 	
-	public List<String> Worlds = new ArrayList<String>();
-	
-	public List<String> Sounds = new ArrayList<String>();
-	
-	public boolean RandomEvents = true;
-	public boolean PermanentNight = true;
-	public boolean SoundOnLogin = true;
-	public boolean Storm = false;
-	public boolean FakeLightning = true;
-	public boolean CreaturesWearPumpkins = true;
-	
-	public boolean EnableUpdater = true;
-	
-	public String HalloweenMessage = "§4Happy Halloween !";
-	
-	public int MaxRandom = 1200;
-	public int SpawnWithPumpkin = 100;
 }

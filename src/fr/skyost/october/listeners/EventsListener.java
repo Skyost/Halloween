@@ -1,4 +1,4 @@
-package com.skyost.october.listeners;
+package fr.skyost.october.listeners;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -20,13 +20,13 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.skyost.october.Halloween;
-import com.skyost.october.tasks.RandomEvent;
+import fr.skyost.october.Halloween;
+import fr.skyost.october.tasks.RandomEvent;
 
 public class EventsListener implements Listener {
 	
 	@EventHandler
-	private static final void onWeatherChange(final WeatherChangeEvent event) {
+	private final void onWeatherChange(final WeatherChangeEvent event) {
 		if(Halloween.config.Worlds.contains(event.getWorld().getName())) {
 			if(Halloween.config.Storm) {
 				if(!event.toWeatherState()) {
@@ -62,7 +62,7 @@ public class EventsListener implements Listener {
 	}
 	
 	@EventHandler
-	private static final void onCreatureSpawn(final CreatureSpawnEvent event) {
+	private final void onCreatureSpawn(final CreatureSpawnEvent event) {
 		if(Halloween.config.Worlds.contains(event.getEntity().getWorld().getName())) {
 			if(Halloween.config.CreaturesWearPumpkins) {
 				int luck = Halloween.rand.nextInt(100) + 1;
@@ -84,7 +84,7 @@ public class EventsListener implements Listener {
 	}
 	
 	@EventHandler
-	private static final void onBlockPlace(final BlockPlaceEvent event) {
+	private final void onBlockPlace(final BlockPlaceEvent event) {
 		if(Halloween.config.Worlds.contains(event.getPlayer().getWorld().getName())) {
 			if(Halloween.haunted.contains(event.getPlayer().getName())) {
 				final Block block = event.getBlock();
@@ -106,7 +106,7 @@ public class EventsListener implements Listener {
 	}
 	
 	@EventHandler
-	private static final void onPlayerEggThrow(final PlayerEggThrowEvent event) {
+	private final void onPlayerEggThrow(final PlayerEggThrowEvent event) {
 		if(Halloween.config.Worlds.contains(event.getPlayer().getWorld().getName())) {
 			if(Halloween.haunted.contains(event.getPlayer().getName())) {
 				if(event.isHatching()) {
@@ -121,7 +121,7 @@ public class EventsListener implements Listener {
 	}
 	
 	@EventHandler
-    public void onInventoryOpenEvent(InventoryOpenEvent event) {
+    private final void onInventoryOpenEvent(final InventoryOpenEvent event) {
 		if(Halloween.config.Worlds.contains(event.getPlayer().getWorld().getName())) {
 			if(Halloween.haunted.contains(event.getPlayer().getName())) {
 		        if(event.getInventory().getType() == InventoryType.CHEST) {

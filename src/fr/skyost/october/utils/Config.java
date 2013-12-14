@@ -1,4 +1,4 @@
-package com.skyost.october.util;
+package fr.skyost.october.utils;
 
 import java.io.BufferedWriter;
 import java.io.File;

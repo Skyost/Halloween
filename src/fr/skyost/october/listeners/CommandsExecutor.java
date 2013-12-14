@@ -1,4 +1,4 @@
-package com.skyost.october.listeners;
+package fr.skyost.october.listeners;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -6,8 +6,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import com.skyost.october.Halloween;
-import com.skyost.october.util.ScareUtils;
+
+import fr.skyost.october.Halloween;
+import fr.skyost.october.utils.ScareUtils;
 
 public class CommandsExecutor implements CommandExecutor {
 	

@@ -1,4 +1,4 @@
-package com.skyost.october.tasks;
+package fr.skyost.october.tasks;
 
 import java.util.List;
 
@@ -7,12 +7,12 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-import com.skyost.october.Halloween;
+import fr.skyost.october.Halloween;
 
 public class Thundering implements Runnable {
 	
-	private static World world;
-	private static Location loc;
+	private World world;
+	private Location loc;
 	
 	public Thundering(World targetWorld) {
 		world = targetWorld;

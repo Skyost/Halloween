@@ -1,4 +1,4 @@
-package com.skyost.october.util;
+package fr.skyost.october.utils;
 
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
@@ -12,7 +12,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
-import com.skyost.october.Halloween;
+import fr.skyost.october.Halloween;
 
 @SuppressWarnings("deprecation")
 public class CitizensUtils {

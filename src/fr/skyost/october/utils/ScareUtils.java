@@ -1,4 +1,4 @@
-package com.skyost.october.util;
+package fr.skyost.october.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -18,7 +18,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.skyost.october.Halloween;
+import fr.skyost.october.Halloween;
 
 public class ScareUtils {
 	
@@ -138,7 +138,6 @@ public class ScareUtils {
 
 							@Override
 							public void run() {
-								grimReaper.teleport(grimReaper.getLocation().add(0, 256, 0));
 								grimReaper.setHealth(0.0);
 							}
 							
